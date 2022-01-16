@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Secret</title>
+    <style>
+        body {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background-color: royalblue;
+        }
+
+        .title {
+            font-size: 50px;
+            color: white;
+            font-family: Verdana, Geneva, Tahoma, sans-serif;
+        }
+
+        #canvas {
+            background-color: rgb(168, 226, 203);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="title"> SPACE WARS</div>
+    <canvas id="canvas" width="800" height="800"></canvas>
+    <script>
+        let canvas = document.getElementById('canvas');
+        let ctx = canvas.getContext('2d');
+        const CANVASWEIGHT = canvas.clientWidth;
+        const CANVASHEIGHT = canvas.clientHeight;
+        let a;
+        class Shuttle {
+            constructor() {
+                this.shuttleSize = 40;
+                this.shuttleSideSize = Math.floor(2 * this.shuttleSize/Math.sqrt(3));
+                this.shuttleHeadPositionX = CANVASHEIGHT / 2;
+                this.shuttleHeadPositionY = CANVASWEIGHT / 2;
+                this.shuttleAngle = Math.PI/2;
+            }
+
+            render() {
+                ctx.beginPath();
+                ctx.moveTo(this.shuttleHeadPositionX, this.shuttleHeadPositionY);
+                ctx.lineTo(this.shuttleHeadPositionX - this.shuttleSize*Math.cos(this.shuttleAngle-Math.PI/6), this.shuttleHeadPositionY - this.shuttleSize*Math.sin(this.shuttleAngle-Math.PI/6) );
+                ctx.lineTo(this.shuttleHeadPositionX - this.shuttleSize*Math.cos(this.shuttleAngle+Math.PI/6), this.shuttleHeadPositionY- this.shuttleSize*Math.sin(this.shuttleAngle+Math.PI/6));
+                ctx.fill();
+            }
+        }
+
+        let shuttle = new Shuttle();
+        shuttle.render();
+    </script>
+
+</body>
+
+</html>
